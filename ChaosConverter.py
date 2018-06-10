@@ -8,6 +8,7 @@ import requests
 
 
 
+"""
 def main():
 
 	print ("Up to date prices:")
@@ -106,7 +107,7 @@ def main():
 	total = float(wisdomC) + float(portalC) + float(whetstoneC) + float(scrapsC) + float(baublesC) + float(gcpC) + float(chiselsC) + float(transmuteC) + float(altC) + float(annulC) + float(chanceC) + float(exaltC) + float(mirrorC) + float(regalC) + float(alchC) + float(chaosC) + float(blessedC) + float(augC) + float(divineC) + float(jewelerC) + float(fusingC) + float(chromeC) + float(scourC) + float(regretC) + float(vaalC) + float(silverC) + float(acsC) + float(jcsC) + float(mcsC) + float(offeringC)
 	print("Total chaos is : %f" % total)
 
-
+"""
 
 def toChaos(currencyPrice, currencyName):
 	print("AVG %s price is : %s" % (currencyName, currencyPrice))
@@ -142,7 +143,7 @@ def priceChecker(currencyURL):
 	return avg
 
 
-
+"""
 if __name__ == "__main__":
 	main()
-
+"""
