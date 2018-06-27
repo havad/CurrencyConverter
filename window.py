@@ -6,6 +6,9 @@ import numpy
 
 def main():
 
+	mainWindow = Tk()
+	mainWindow.title("ChaosConverter")
+
 	
 	wisdomObj = CurrencyItem("Wisdom Scroll", priceChecker("http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=17"), 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=17")
 	portalObj = CurrencyItem("Portal Scroll", priceChecker("http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=18"), 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=18")
@@ -15,8 +18,7 @@ def main():
 	gcpObj = CurrencyItem("GCP", priceChecker("http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=5"), 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=5")
 	chiselObj = CurrencyItem("Chisels", priceChecker("http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=10"), 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=10")
 
-	mainWindow = Tk()
-	mainWindow.title("ChaosConverter")
+
 
 	ListofObj = [wisdomObj, portalObj, whetstoneObj, scrapObj, baubleObj, gcpObj, chiselObj]
 

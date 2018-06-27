@@ -1,14 +1,18 @@
 from ChaosConverter import *
+from tkinter import *
+#from window import *
 
 class CurrencyItem:
 
+	window = ""
 	name = ""
 	ratio = 0.0
 	owned = 0
 	poetradeurl = ""
 
-	def __init__(self, name, ratio, owned, poetradeurl):
-		self.name = name
+	def __init__(self, window, myname, ratio, owned, poetradeurl):
+		name = StringVar(window)
+		self.name.set(myname)
 		self.ratio = ratio
 		self.owned = owned
 		self.poetradeurl = poetradeurl
