@@ -4,15 +4,15 @@ from tkinter import *
 
 class CurrencyItem:
 
-	window = ""
+	#window = ""
 	name = ""
 	ratio = 0.0
 	owned = 0
 	poetradeurl = ""
 
-	def __init__(self, window, myname, ratio, owned, poetradeurl):
-		name = StringVar(window)
-		self.name.set(myname)
+	def __init__(self, name, ratio, owned, poetradeurl):
+		#name = StringVar(window)
+		self.name = name
 		self.ratio = ratio
 		self.owned = owned
 		self.poetradeurl = poetradeurl

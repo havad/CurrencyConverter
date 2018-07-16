@@ -7,8 +7,6 @@ from bs4 import BeautifulSoup
 import requests
 
 
-
-
 def toChaos(currencyPrice, currencyName):
 	print("AVG %s price is : %s" % (currencyName, currencyPrice))
 	currency = input("How many %s do you have? " % (currencyName))
