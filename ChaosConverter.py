@@ -60,7 +60,7 @@ def main():
 		elif(selection == "r"):
 			refresh()
 		elif(selection == "o"):
-			print("Editing one\n")
+			editOne()
 		elif(selection == "a"):
 			editAll()
 
@@ -84,12 +84,22 @@ def refresh():
 			#print(item.getName() + " " + str(item.getRatio()))  #works as far as i know. left in for debugging
 	print("All ratios refreshed!\n")
 
+def editOne():
+	print("Which currency would you like to edit?\n")
+	req = input().lower()
+	for item in listOfObj:
+		if(req == item.getName().lower()):
+			print("Input new amount owned")
+			newAmount = input()
+			item.setOwned(int(newAmount))
+			#print(item.getOwned())		#works, left in for debugging
+
 def editAll():
 	print("Editing All")
 	for item in listOfObj:
 		print(item.getName() + ": ")
 		amount = input()
-		item.setOwned = int(amount)
+		item.setOwned(int(amount))
 
 #scrapes the proper currency.poe.trade url for the ratio of currency -> chaos
 def priceChecker(currencyURL):

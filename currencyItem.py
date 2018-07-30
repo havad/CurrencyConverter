@@ -25,7 +25,9 @@ class CurrencyItem:
 
 	def setOwned(self, owned):
 		self.owned = owned
-		
+
+	def getOwned(self):
+		return self.owned
 
 
 
