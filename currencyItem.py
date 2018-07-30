@@ -1,10 +1,38 @@
-from ChaosConverter import *
-from tkinter import *
-#from window import *
+class CurrencyItem:
+
+	name = ""
+	ratio = 0.0
+	owned = 0
+	poetradeurl = ""
+
+	def __init__(self, name, ratio, owned, poetradeurl):
+		self.name = name
+		self.ratio = ratio
+		self.owned = owned
+		self.poetradeurl = poetradeurl
+
+	def getName(self):
+		return self.name
+
+	def setRatio(self, ratio):
+		self.ratio = ratio
+
+	def getPoetradeurl(self):
+		return self.poetradeurl
+
+	def getRatio(self):
+		return self.ratio
+
+
+
+
+
+
+"""
+from ChaosConverter import priceChecker
 
 class CurrencyItem:
 
-	#window = ""
 	name = ""
 	ratio = 0.0
 	owned = 0
@@ -37,3 +65,5 @@ class CurrencyItem:
 
 	def updateRatio(self):
 		self.setRatio(priceChecker(self.poetradeurl))
+
+"""
