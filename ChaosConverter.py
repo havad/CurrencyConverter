@@ -62,7 +62,7 @@ def main():
 		elif(selection == "o"):
 			print("Editing one\n")
 		elif(selection == "a"):
-			print("Editing all\n")
+			editAll()
 
 
 
@@ -76,19 +76,26 @@ def toChaos(currencyPrice, currencyName):
 
 #Refreshes the ratios for all currency objects
 def refresh():
-	print("Refreshing, please wait...\n")
+	print("Refreshing, please wait...")
 
 	for item in listOfObj:
 		if(item.getName() != "Chaos Orb"):
 			item.setRatio(priceChecker(item.getPoetradeurl()))
 			#print(item.getName() + " " + str(item.getRatio()))  #works as far as i know. left in for debugging
+	print("All ratios refreshed!\n")
+
+def editAll():
+	print("Editing All")
+	for item in listOfObj:
+		print(item.getName() + ": ")
+		amount = input()
+		item.setOwned = int(amount)
 
 #scrapes the proper currency.poe.trade url for the ratio of currency -> chaos
 def priceChecker(currencyURL):
 	url = currencyURL
 
 	page = requests.get(url)
-
 
 	soup = BeautifulSoup(page.content, 'html.parser')
 	smallTag = soup.findAll("small")
@@ -106,6 +113,7 @@ def priceChecker(currencyURL):
 
 	avg = avg/5
 	return avg
+
 
 if __name__ == "__main__":
 	main()

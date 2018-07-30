@@ -23,6 +23,10 @@ class CurrencyItem:
 	def getRatio(self):
 		return self.ratio
 
+	def setOwned(self, owned):
+		self.owned = owned
+		
+
 
 
 
