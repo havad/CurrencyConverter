@@ -7,40 +7,42 @@ from bs4 import BeautifulSoup
 from currencyItem import *
 import requests
 
+EXTRA_SMALL = 6
+
 #any commented out objects below often have less than 5 entries. when a check for this is implemented, uncomment and put them in listOfObj
 
-scrollObj = CurrencyItem("Scroll of Wisdom", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=17")
-portalObj = CurrencyItem("Portal Scroll", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=18")
-whetstoneObj = CurrencyItem("Blacksmith's Whetstone", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=20")
-scrapObj = CurrencyItem("Armourer's Scrap", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=19")
-baubleObj = CurrencyItem("Glassblower's Bauble", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=21")
-gcpObj = CurrencyItem("Gemcutter's Prism", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=5")
-chiselObj = CurrencyItem("Cartographer's Chisel", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=10")
-transmuteObj = CurrencyItem("Orb of Transmutation", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=22")
-altObj = CurrencyItem("Orb of Alteration", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=1")
-annulObj = CurrencyItem("Orb of Annulment", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=513")
-chanceObj = CurrencyItem("Orb of Chance", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=9")
-exaltObj = CurrencyItem("Exalted Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=6")
-mirrorObj = CurrencyItem("Mirror of Kalandra", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=24")
-regalObj = CurrencyItem("Regal Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=14")
-alchObj = CurrencyItem("Orb of Alchemy", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=3")
-chaosObj = CurrencyItem("Chaos Orb", 1, 0, None)
-blessedObj = CurrencyItem("Blessed Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=12")
-augObj = CurrencyItem("Orb of Augmentation", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=23")
-exshardObj = CurrencyItem("Exalted Shard", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=521")
-mirrorshardObj = CurrencyItem("Mirror Shard", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=520")
-divineObj = CurrencyItem("Divine Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=15")
-jewellerObj = CurrencyItem("Jeweller's Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=8")
-fusingObj = CurrencyItem("Orb of Fusing", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=2")
-chromeObj = CurrencyItem("Chromatic Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=7")
-scourObj = CurrencyItem("Orb of Scouring", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=11")
-regretObj = CurrencyItem("Orb of Regret", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=13")
-vaalObj = CurrencyItem("Vaal Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=16")
-perandusObj = CurrencyItem("Perandus Coin", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=26")
-silverObj = CurrencyItem("Silver Coin", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=35")
-acsObj = CurrencyItem("Apprentice Cartographer's Sextant", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=45")
-jcsObj = CurrencyItem("Journeyman Cartographer's Sextant", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=46")
-mcsObj = CurrencyItem("Master Cartographer's Sextant", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=47")
+scrollObj = CurrencyItem("Scroll of Wisdom", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=17", "wisdom")
+portalObj = CurrencyItem("Portal Scroll", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=18", "portal")
+whetstoneObj = CurrencyItem("Blacksmith's Whetstone", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=20", "whetstone")
+scrapObj = CurrencyItem("Armourer's Scrap", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=19", "scrap")
+baubleObj = CurrencyItem("Glassblower's Bauble", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=21", "bauble")
+gcpObj = CurrencyItem("Gemcutter's Prism", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=5", "gcp")
+chiselObj = CurrencyItem("Cartographer's Chisel", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=10", "chisel")
+transmuteObj = CurrencyItem("Orb of Transmutation", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=22", "transmute")
+altObj = CurrencyItem("Orb of Alteration", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=1", "alt")
+annulObj = CurrencyItem("Orb of Annulment", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=513", "annul")
+chanceObj = CurrencyItem("Orb of Chance", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=9", "chance")
+exaltObj = CurrencyItem("Exalted Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=6", "ex")
+mirrorObj = CurrencyItem("Mirror of Kalandra", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=24", "mirror")
+regalObj = CurrencyItem("Regal Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=14", "regal")
+alchObj = CurrencyItem("Orb of Alchemy", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=3", "alch")
+chaosObj = CurrencyItem("Chaos Orb", 1, 0, None, "chaos")
+blessedObj = CurrencyItem("Blessed Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=12", "blessed")
+augObj = CurrencyItem("Orb of Augmentation", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=23", "aug")
+exshardObj = CurrencyItem("Exalted Shard", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=521", "exshard")
+mirrorshardObj = CurrencyItem("Mirror Shard", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=520", "mshard")
+divineObj = CurrencyItem("Divine Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=15", "divine")
+jewellerObj = CurrencyItem("Jeweller's Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=8", "jeweller")
+fusingObj = CurrencyItem("Orb of Fusing", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=2", "fuse")
+chromeObj = CurrencyItem("Chromatic Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=7", "chrome")
+scourObj = CurrencyItem("Orb of Scouring", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=11", "scour")
+regretObj = CurrencyItem("Orb of Regret", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=13", "regret")
+vaalObj = CurrencyItem("Vaal Orb", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=16", "vaal")
+perandusObj = CurrencyItem("Perandus Coin", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=26", "perandus")
+silverObj = CurrencyItem("Silver Coin", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=35", "silver")
+acsObj = CurrencyItem("Apprentice Cartographer's Sextant", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=45", "acs")
+jcsObj = CurrencyItem("Journeyman Cartographer's Sextant", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=46", "jcs")
+mcsObj = CurrencyItem("Master Cartographer's Sextant", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=47", "mcs")
 
 listOfObj = [scrollObj, portalObj, whetstoneObj, scrapObj, baubleObj, gcpObj, chiselObj, transmuteObj, altObj, annulObj, chanceObj, exaltObj,
 			mirrorObj, regalObj, alchObj, chaosObj, blessedObj, augObj, exshardObj, mirrorshardObj, divineObj, jewellerObj, fusingObj, chromeObj,
@@ -69,7 +71,8 @@ def main():
 		elif(selection == "c"):
 			showChaos()
 
-
+#shows how much currency in chaos the user has based on the current ratios and owned amounts
+#displays chaos for each currency and then a total at the end
 def showChaos():
 	count = 0
 	for item in listOfObj:
@@ -108,16 +111,18 @@ def refresh():
 			#print(item.getName() + " " + str(item.getRatio()))  #works as far as i know. left in for debugging
 	print("All ratios refreshed!\n")
 
+#lets the user choose one currency inventory to edit
 def editOne():
 	print("Which currency would you like to edit?\n")
 	req = input().lower()
 	for item in listOfObj:
-		if(req == item.getName().lower()):
+		if((req == item.getName().lower()) or (req == item.getCode().lower())):
 			print("Input new amount owned")
 			newAmount = input()
 			item.setOwned(int(newAmount))
 			#print(item.getOwned())		#works, left in for debugging
 
+#lets the user edit every currency inventory
 def editAll():
 	print("Editing All")
 	for item in listOfObj:
@@ -143,20 +148,22 @@ def priceChecker(currencyURL):
 
 	i = 0
 	avg = 0
-	while ((i < (arrayLength - 6)) and (i < 10)):
+	while ((i < (arrayLength - EXTRA_SMALL)) and (i < 10)):
 		myString = smallTag[i].encode("UTF-8")
 		splitMyString = myString.decode("UTF-8").split(" ")
 		ratios[i] = float(splitMyString[6])
 		avg = avg + ratios[i]
 		i = i + 2
-		print("i is: " + str(i))
+		#print("i is: " + str(i))
 		#print(str(ratios[i]))
-	print(str((arrayLength-6)/2))
-	if(((arrayLength-6)/2) == 0):
+
+	#sometimes there are no listings, arrayLength-EXTRA_SMALL will be 0 when this happens, i will never be zero after the loop so i've left the code like this, can probably be changed
+	print(str((arrayLength-EXTRA_SMALL)/2))
+	if(((arrayLength-EXTRA_SMALL)/2) == 0):
 		avg = 0
 	else:
 		avg = avg/(i/2)
-	print("avg is: " + str(avg))
+	#print("avg is: " + str(avg))
 	return avg
 
 

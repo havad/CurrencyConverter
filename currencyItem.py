@@ -4,12 +4,14 @@ class CurrencyItem:
 	ratio = 0.0
 	owned = 0
 	poetradeurl = ""
+	code = ""
 
-	def __init__(self, name, ratio, owned, poetradeurl):
+	def __init__(self, name, ratio, owned, poetradeurl, code):
 		self.name = name
 		self.ratio = ratio
 		self.owned = owned
 		self.poetradeurl = poetradeurl
+		self.code = code
 
 	def getName(self):
 		return self.name
@@ -28,6 +30,9 @@ class CurrencyItem:
 
 	def getOwned(self):
 		return self.owned
+
+	def getCode(self):
+		return self.code
 
 
 
