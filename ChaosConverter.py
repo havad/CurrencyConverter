@@ -7,12 +7,11 @@ from bs4 import BeautifulSoup
 from currencyItem import *
 import requests
 
-EXTRA_SMALL = 6
-ratio = "ratios.txt"
-inventory = "inventory.txt"
+EXTRA_SMALL = 6			#this variable is for the number of extra small tags on any given currency.poe.trade page that lists offers
+ratio = "ratios.txt"			#file for reading and writing ratios
+inventory = "inventory.txt"		#file for reading and writing inventory
 
-#any commented out objects below often have less than 5 entries. when a check for this is implemented, uncomment and put them in listOfObj
-
+#create all of the currency objects
 scrollObj = CurrencyItem("Scroll of Wisdom", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=17", "wisdom")
 portalObj = CurrencyItem("Portal Scroll", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=18", "portal")
 whetstoneObj = CurrencyItem("Blacksmith's Whetstone", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=20", "whetstone")
@@ -76,7 +75,7 @@ def main():
 		elif(selection == "c"):
 			showChaos()
 	
-
+#writes the data from all currency objects to the text files
 def saveData():
 	ratioFile = open(ratio, "w")
 	inventoryFile = open(inventory, "w")
@@ -118,12 +117,6 @@ def loadFile():
 def showChaos():
 	count = 0
 	for item in listOfObj:
-		"""
-		if(item.getOwned() == 0):
-			inChaos = 0
-		else:
-			inChaos = item.getRatio()/item.getOwned()
-		"""
 		if(item.getRatio() == 0):
 			inChaos = 0
 		else:
@@ -132,17 +125,6 @@ def showChaos():
 		count = count + inChaos
 	print("Total Chaos: " + str(count) + "\n")
 
-#don't think this function is relevant anymore
-"""
-def toChaos(currencyPrice, currencyName):
-	print("AVG %s price is : %s" % (currencyName, currencyPrice))
-	currency = input("How many %s do you have? " % (currencyName))
-	currencyC = float(currency)/currencyPrice
-	print("You have %f chaos in %s" % (currencyC, currencyName))
-	print("")
-	return currencyC
-"""
-
 #Refreshes the ratios for all currency objects
 def refresh():
 	print("Refreshing, please wait...")
@@ -150,7 +132,6 @@ def refresh():
 	for item in listOfObj:
 		if(item.getName() != "Chaos Orb"):
 			item.setRatio(priceChecker(item.getPoetradeurl()))
-			#print(item.getName() + " " + str(item.getRatio()))  #works as far as i know. left in for debugging
 	print("All ratios refreshed!\n")
 
 #lets the user choose one currency inventory to edit
@@ -170,7 +151,6 @@ def editOne():
 				else:
 					item.setOwned(int(newAmount))
 					break
-			#print(item.getOwned())		#works, left in for debugging
 		if(found == True):
 			break
 
@@ -197,10 +177,6 @@ def priceChecker(currencyURL):
 	soup = BeautifulSoup(page.content, 'html.parser')
 	smallTag = soup.findAll("small")
 	arrayLength = len(smallTag)
-	#print(str(arrayLength))
-	#print(str(arrayLength - 6))
-	#for thing in smallTag:
-		#print(thing)
 
 	ratios = [0] * 10
 
@@ -212,16 +188,11 @@ def priceChecker(currencyURL):
 		ratios[i] = float(splitMyString[6])
 		avg = avg + ratios[i]
 		i = i + 2
-		#print("i is: " + str(i))
-		#print(str(ratios[i]))
 
-	#sometimes there are no listings, arrayLength-EXTRA_SMALL will be 0 when this happens, i will never be zero after the loop so i've left the code like this, can probably be changed
-	#print(str((arrayLength-EXTRA_SMALL)/2))		#left in for debugging
 	if(((arrayLength-EXTRA_SMALL)/2) == 0):
 		avg = 0
 	else:
 		avg = avg/(i/2)
-	#print("avg is: " + str(avg))
 	return avg
 
 
