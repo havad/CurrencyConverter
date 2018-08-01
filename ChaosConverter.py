@@ -115,20 +115,36 @@ def refresh():
 def editOne():
 	print("Which currency would you like to edit?\n")
 	req = input().lower()
+	found = False
 	for item in listOfObj:
 		if((req == item.getName().lower()) or (req == item.getCode().lower())):
+			found = True
 			print("Input new amount owned")
-			newAmount = input()
-			item.setOwned(int(newAmount))
+			while(True):
+				try:
+					newAmount = int(input())
+				except:
+					print("Not a number. Please enter a new value.")
+				else:
+					item.setOwned(int(newAmount))
+					break
 			#print(item.getOwned())		#works, left in for debugging
+		if(found == True):
+			break
 
 #lets the user edit every currency inventory
 def editAll():
 	print("Editing All")
 	for item in listOfObj:
 		print(item.getName() + ": ")
-		amount = input()
-		item.setOwned(int(amount))
+		while(True):
+			try:
+				amount = int(input())
+			except:
+				print("Not a number. Please enter a new value")
+			else:
+				item.setOwned(int(amount))
+				break
 
 #scrapes the proper currency.poe.trade url for the ratio of currency -> chaos
 def priceChecker(currencyURL):
