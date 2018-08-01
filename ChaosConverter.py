@@ -8,6 +8,8 @@ from currencyItem import *
 import requests
 
 EXTRA_SMALL = 6
+ratio = "ratios.txt"
+inventory = "inventory.txt"
 
 #any commented out objects below often have less than 5 entries. when a check for this is implemented, uncomment and put them in listOfObj
 
@@ -52,6 +54,8 @@ listOfObj = [scrollObj, portalObj, whetstoneObj, scrapObj, baubleObj, gcpObj, ch
 def main():
 	print("Program Running")
 
+	loadFile()
+
 	while(True):
 		print("What would you like to do?\n")
 		print("(R)efresh ratios")
@@ -61,6 +65,7 @@ def main():
 		print("(Q)uit\n")
 		selection = input().lower()
 		if(selection == "q"):
+			saveData()
 			exit(0)
 		elif(selection == "r"):
 			refresh()
@@ -70,6 +75,43 @@ def main():
 			editAll()
 		elif(selection == "c"):
 			showChaos()
+	
+
+def saveData():
+	ratioFile = open(ratio, "w")
+	inventoryFile = open(inventory, "w")
+	for item in listOfObj:
+		ratioFile.write(str(item.getRatio()) + "\n")
+		inventoryFile.write(str(item.getOwned()) + "\n")
+	ratioFile.close()
+	inventoryFile.close()
+
+#loads data from ratios.txt and inventory.txt to all currency objects
+def loadFile():
+	try:
+		ratioFile = open(ratio, "r+")
+		lines = ratioFile.readlines()
+		i = 0
+		for item in listOfObj:
+			item.setRatio(float(lines[i]))
+			i += 1
+		ratioFile.close()
+	except:
+		print(ratio + " not found, creating it now...")
+		ratioFile = open(ratio, "w+")
+		ratioFile.close()
+	try:
+		inventoryFile = open(inventory, "r+")
+		lines = inventoryFile.readlines()
+		i = 0
+		for item in listOfObj:
+			item.setOwned(int(lines[i]))
+			i += 1
+		inventoryFile.close()
+	except:
+		print(inventory + " not found, creating it now...")
+		inventoryFile = open(inventory, "w+")
+		inventoryFile.close()
 
 #shows how much currency in chaos the user has based on the current ratios and owned amounts
 #displays chaos for each currency and then a total at the end
@@ -174,7 +216,7 @@ def priceChecker(currencyURL):
 		#print(str(ratios[i]))
 
 	#sometimes there are no listings, arrayLength-EXTRA_SMALL will be 0 when this happens, i will never be zero after the loop so i've left the code like this, can probably be changed
-	print(str((arrayLength-EXTRA_SMALL)/2))
+	#print(str((arrayLength-EXTRA_SMALL)/2))		#left in for debugging
 	if(((arrayLength-EXTRA_SMALL)/2) == 0):
 		avg = 0
 	else:
