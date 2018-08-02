@@ -77,6 +77,7 @@ def main():
 		print("Edit (A)ll")
 		print("(C)urrency in Chaos")
 		print("Change (L)eagues")
+		print("(S)how League")
 		print("(Q)uit\n")
 		selection = input().lower()
 		if(selection == "q"):
@@ -100,6 +101,8 @@ def main():
 		elif(selection == "l"):
 			print("should change leagues")
 			changeLeague(currentLeague)
+		elif(selection == "s"):
+			print(currentLeague.getCurrent())
 
 def changeLeague(current):
 	print(current.getCurrent())
@@ -136,52 +139,17 @@ def changeLeague(current):
 			break
 		else:
 			print("Not a current league, please input a current league.")
-		changeURL(newLeague)
+	changeURL(newLeague)
 
 def changeURL(new):
 	if(new == standard):
-		for item in listOfObj:
-			
+		print("fix standard url")			
 	elif(new == hstandard):
+		print("fix hardcore standard url")
 	elif(new == temp):
+		print("fix temp url")
 	elif(new == htemp):
-
-"""
-#change which files are loaded into the currency objects
-def changeLeague(current):
-	if(current != None):
-		if(current == standard):
-			saveData(sratio, sinventory)
-		elif(current == hstandard):
-			saveData(hsratio, hsinventory)
-		elif(current == temp):
-			saveData(tratio, tinventory)
-		elif(current == htemp):
-			saveData(htratio, htinventory)
-
-	while(True):
-		print("What league are you now playing in?")
-		league = input().lower()
-		global cLeague
-		if(league == standard):
-			loadFile(sratio, sinventory)
-			cLeague = standard
-			break
-		elif(league == hstandard):
-			loadFile(hsratio, hsinventory)
-			cLeague = hstandard
-			break
-		elif(league == temp):
-			loadFile(tratio, tinventory)
-			cLeague = temp
-			break
-		elif(league == htemp):
-			loadFile(htratio, htinventory)
-			cLeague = htemp
-			break
-		else:
-			print("Not a current league.\n")
-"""	
+		print("fix hardcore temp url")
 
 #writes the data from all currency objects to the text files
 def saveData(ratio, inventory):
