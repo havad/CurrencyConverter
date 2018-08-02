@@ -34,6 +34,9 @@ class CurrencyItem:
 	def getCode(self):
 		return self.code
 
+	def setURL(self, url):
+		self.poetradeurl = url
+
 
 
 

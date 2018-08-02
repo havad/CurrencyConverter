@@ -5,6 +5,7 @@ depends on BeautifulSoup4 to scrape the data off of the pages
 
 from bs4 import BeautifulSoup
 from currencyItem import *
+from league import *
 import requests
 
 standard = "standard"				#strings used for switching leagues
@@ -23,8 +24,6 @@ sinventory = "sinventory.txt"		#file for reading and writing inventory
 hsinventory = "hsinventory.txt"
 tinventory = "tinventory.txt"
 htinventory = "htinventory.txt"
-
-cLeague = None
 
 #create all of the currency objects
 scrollObj = CurrencyItem("Scroll of Wisdom", 0, 0, "http://currency.poe.trade/search?league=Incursion&online=x&want=4&have=17", "wisdom")
@@ -64,14 +63,12 @@ listOfObj = [scrollObj, portalObj, whetstoneObj, scrapObj, baubleObj, gcpObj, ch
 			mirrorObj, regalObj, alchObj, chaosObj, blessedObj, augObj, exshardObj, mirrorshardObj, divineObj, jewellerObj, fusingObj, chromeObj,
 			scourObj, regalObj, vaalObj, perandusObj, silverObj, acsObj, jcsObj, mcsObj]
 
+currentLeague = League("none")
 
 def main():
 	print("Program Running")
 
-	global cLeague
-
-	changeLeague(cLeague)
-	#loadFile()
+	changeLeague(currentLeague)
 
 	while(True):
 		print("What would you like to do?\n")
@@ -83,7 +80,14 @@ def main():
 		print("(Q)uit\n")
 		selection = input().lower()
 		if(selection == "q"):
-			#saveData()
+			if(currentLeague.getCurrent() == standard):
+				saveData(sratio, sinventory)
+			elif(currentLeague.getCurrent() == hstandard):
+				saveData(hsratio, hsinventory)
+			elif(currentLeague.getCurrent() == temp):
+				saveData(tratio, tinventory)
+			elif(currentLeague.getCurrent() == htemp):
+				saveData(htratio, htinventory)
 			exit(0)
 		elif(selection == "r"):
 			refresh()
@@ -94,9 +98,55 @@ def main():
 		elif(selection == "c"):
 			showChaos()
 		elif(selection == "l"):
-			changeLeague(cLeague)
-	
+			print("should change leagues")
+			changeLeague(currentLeague)
 
+def changeLeague(current):
+	print(current.getCurrent())
+	stringCurrent = current.getCurrent()
+
+	if(stringCurrent != "none"):
+		if(stringCurrent == standard):
+			saveData(sratio, sinventory)
+		elif(stringCurrent == hstandard):
+			saveData(hsratio, hsinventory)
+		elif(stringCurrent == temp):
+			saveData(tratio, tinventory)
+		elif(stringCurrent == htemp):
+			saveData(htratio, htinventory)
+
+	print("What league do you want to use?")
+	while(True):
+		newLeague = input().lower()
+		if (newLeague == standard):
+			loadFile(sratio, sinventory)
+			current.setCurrent(standard)
+			break
+		elif (newLeague == hstandard):
+			loadFile(hsratio, hsinventory)
+			current.setCurrent(hstandard)
+			break
+		elif (newLeague == temp):
+			loadFile(tratio, tinventory)
+			current.setCurrent(temp)
+			break
+		elif(newLeague == htemp):
+			loadFile(htratio, htinventory)
+			current.setCurrent(htemp)
+			break
+		else:
+			print("Not a current league, please input a current league.")
+		changeURL(newLeague)
+
+def changeURL(new):
+	if(new == standard):
+		for item in listOfObj:
+			
+	elif(new == hstandard):
+	elif(new == temp):
+	elif(new == htemp):
+
+"""
 #change which files are loaded into the currency objects
 def changeLeague(current):
 	if(current != None):
@@ -131,7 +181,7 @@ def changeLeague(current):
 			break
 		else:
 			print("Not a current league.\n")
-		
+"""	
 
 #writes the data from all currency objects to the text files
 def saveData(ratio, inventory):
@@ -157,6 +207,8 @@ def loadFile(ratio, inventory):
 		print(ratio + " not found, creating it now...")
 		ratioFile = open(ratio, "w+")
 		ratioFile.close()
+		for item in listOfObj:
+			item.setRatio(0.0)
 	try:
 		inventoryFile = open(inventory, "r+")
 		lines = inventoryFile.readlines()
@@ -169,6 +221,8 @@ def loadFile(ratio, inventory):
 		print(inventory + " not found, creating it now...")
 		inventoryFile = open(inventory, "w+")
 		inventoryFile.close()
+		for item in listOfObj:
+			item.setOwned(0)
 
 #shows how much currency in chaos the user has based on the current ratios and owned amounts
 #displays chaos for each currency and then a total at the end
